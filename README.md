@@ -7,8 +7,7 @@ Python 3.11 + FastAPI + uv 기반 프로젝트 스캐폴드입니다.
 - FastAPI
 - Uvicorn
 - Pydantic v2
-- pandas
-- sentence-transformers
+- Optional ML extras (pandas, sentence-transformers)
 - pytest
 - GitHub Actions CI
 - Python logging
@@ -23,13 +22,15 @@ Python 3.11 + FastAPI + uv 기반 프로젝트 스캐폴드입니다.
 ## Local setup
 
 1. Install dependencies:
-   uv sync --all-groups
-2. Run server:
+   uv sync --group dev
+2. Install optional ML dependencies if needed:
+   uv sync --group dev --extra ml
+3. Run server:
    uv run python main.py
-3. Run tests:
+4. Run tests:
    uv run pytest -q
 
 ## Notes
 
-- This environment had PyPI timeout issues during dependency download.
-- The project is fully configured, and installation completes with `uv sync --all-groups` once network access to PyPI is available.
+- CI installs only the dependencies required to run tests.
+- Optional ML packages are available through the `ml` extra when needed.
