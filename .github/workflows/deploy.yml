@@ -103,9 +103,8 @@ jobs:
                   f' --region {aws_region}'
                   f' --output text'
                   f' --query "Parameters[*].[Name,Value]"'
-                  f' | while IFS=$\'\\t\' read -r name value; do'
-                  f'     echo "${{name#{ssm_path}}}=$value";'
-                  f'   done > /tmp/{container}.env'
+                  f' | awk -F\'\\t\' \'{{n=$1; sub("{ssm_path}","",n); print n"="$2}}\''
+                  f' > /tmp/{container}.env'
               ),
 
               # 기존 컨테이너 중단 및 제거
